@@ -4,14 +4,14 @@ L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=5mf
     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(map);
 
-// const geojsonMarkerOptions = {      // marker styling
-//     radius : 5,
-//     fillColor : "#0000FF",
-//     color : "#0000",
-//     weight: 5,
-//     opacity : 1,
-//     fillOpacity : 0.8
-// }
+const geojsonMarkerOptions = {      // marker styling
+    radius : 5,
+    fillColor : "#0000FF",
+    color : "#0000",
+    weight: 5,
+    opacity : 1,
+    fillOpacity : 0.8
+}
 
 
 // Scale at bottom-left corner
@@ -40,43 +40,8 @@ L.Control.Watermark=L.Control.extend({
             }
         L.control.watermark({position:'bottomleft'}).addTo(map);
 
-
-// JSON data
-// var locations = {
-// "type": "FeatureCollection",
-// "features": [
-// {
-// "type": "Feature",
-// "properties": {"name": "This is a check popup feature prototype for Smart Bengal Hackathon"},
-// "geometry": {
-// "coordinates": [
-//   88.44560102519625,
-//   22.4794475212245
-// ],
-// "type": "Point"
-// }
-// },
-// {
-// "type": "Feature",
-// "properties": {"name": "This is a check popup feature prototype for Smart Bengal Hackathon"},
-// "geometry": {
-// "coordinates": [
-//   88.44776594741222,
-//   22.478207988914235
-// ],
-// "type": "Point"
-// }
-// }
-// ]
-// }
 var markers = L.markerClusterGroup();
 
-
-// var marker = L.geoJSON(locations,{
-// onEachFeature: function(feature,layer){
-// layer.bindPopup(feature.properties.name);
-// }
-// });
 
 var marker;
 
@@ -85,7 +50,7 @@ fetch('http://localhost:3000/locations')
   .then(data => {
     var marker = L.geoJSON(data, {
       onEachFeature: function(feature, layer) {
-        layer.bindPopup(feature.properties.name);
+        layer.bindPopup(feature.properties.district);
       }
     });
     markers.addLayer(marker);
