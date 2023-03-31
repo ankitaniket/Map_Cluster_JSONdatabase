@@ -11,9 +11,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/locations', (req, res) => {
-  res.json(db.employee.map(({ name, lat, lng }) => ({
+  res.json(db.employee.map(({ name, lat, lng, district }) => ({
     type: 'Feature',
-    properties: { name },
+    properties: { 
+      name:name,
+      district:district
+     },
     geometry: { type: 'Point', coordinates: [lng, lat] }
   })));
 });
